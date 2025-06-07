@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe A1 Hazırlık Planı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .goals {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .goals h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .goals ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .goals li {
+            background: rgba(255, 255, 255, 0.7);
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            position: relative;
+            padding-left: 40px;
+            transition: transform 0.2s ease;
+        }
+
+        .goals li:hover {
+            transform: translateX(5px);
+        }
+
+        .goals li::before {
+            content: '✨';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .resources {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff8e8e;
+        }
+
+        .resources h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resources ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resources li {
+            background: rgba(255, 255, 255, 0.8);
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .resources li::before {
+            content: '📚';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .daily-plan {
+            margin-top: 30px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-content {
+            padding: 20px;
+        }
+
+        .time-slot {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            transition: background-color 0.2s ease;
+        }
+
+        .time-slot:hover {
+            background: #f0f2ff;
+        }
+
+        .time-slot::before {
+            content: '⏰';
+            position: absolute;
+            left: -2px;
+            top: 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .task {
+            color: #333;
+            margin-left: 25px;
+        }
+
+        .checklist {
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .checklist h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checklist-item.completed {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .goals, .resources, .checklist {
+                padding: 15px;
+            }
+
+            .day-content {
+                padding: 15px;
+            }
+
+            .time-slot {
+                padding: 12px;
+            }
+        }
+
+        .floating-emoji {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: floatUp 3s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 Goethe A1 Sertifikası Hazırlık Planı</h1>
+            <p>📆 9 Haziran Pazartesi – 15 Haziran Pazar 2025</p>
+        </div>
+
+        <div class="content">
+            <div class="goals">
+                <h2>🎯 Haftalık Hedefler</h2>
+                <ul>
+                    <li>Alfabe, telaffuz ve temel selamlaşmalar</li>
+                    <li>Kişisel bilgiler: ad, yaş, ülke, meslek</li>
+                    <li>"sein" ve "haben" fiil çekimleri</li>
+                    <li>50 temel A1 kelimeyi Quizlet ile öğrenmek</li>
+                    <li>Kendini tanıtma cümlelerini kurabilmek</li>
+                </ul>
+            </div>
+
+            <div class="resources">
+                <h2>📘 Kaynaklar</h2>
+                <ul>
+                    <li>YouTube: Almanca Öğreniyorum – Ders 1–4</li>
+                    <li>Quizlet: "Goethe A1 – Temel Kelimeler" (günlük 10–15 kelime)</li>
+                    <li>Deutsche Welle – Nicos Weg A1 (1–4. bölüm)</li>
+                    <li>Easy German – A1 Starter Playlist</li>
+                    <li>Menschen A1 (PDF veya kitapsa sayfa belirtilecek)</li>
+                </ul>
+            </div>
+
+            <div class="daily-plan">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">📆 Günlük Plan</h2>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>9 Haziran Pazartesi</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">20:30–21:00</div>
+                            <div class="task">YouTube: Ders 1 – Alfabe ve Selamlaşma</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">Quizlet: 15 yeni kelime ezberle ("Merhaba, Adım, Nerelisin?" gibi)</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:30–22:00</div>
+                            <div class="task">DW Nicos Weg A1 – Bölüm 1 (dinle, altyazılı izle)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>10 Haziran Salı</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">20:30–21:00</div>
+                            <div class="task">YouTube: Ders 2 – Tanışma, "Ich heiße…"</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">Quizlet: 15 yeni kelime + test çöz</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:30–22:00</div>
+                            <div class="task">Easy German A1 – Introducing Yourself</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>11 Haziran Çarşamba</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">20:30–21:00</div>
+                            <div class="task">Fiil çekimi: "sein" (ben, sen, o vs.)</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">5 cümle yaz: Ich bin … / Er ist …</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:30–22:00</div>
+                            <div class="task">Quizlet tekrar: 30 kelime üzerinden test</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>12 Haziran Perşembe</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">20:30–21:00</div>
+                            <div class="task">YouTube: Ders 3 – "haben" fiili</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">5 yeni cümle yaz: Ich habe … / Sie hat …</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:30–22:00</div>
+                            <div class="task">Easy German: Possessions (sahip olduğumuz şeyler)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>13 Haziran Cuma</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">20:30–21:00</div>
+                            <div class="task">DW Nicos Weg – Bölüm 2 (video + quiz çöz)</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">Quizlet: 10 yeni kelime + test modu</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:30–22:00</div>
+                            <div class="task">1. hafta cümle tekrarları: 10 cümleyi yüksek sesle oku</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>14 Haziran Cumartesi</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">10:00–11:30</div>
+                            <div class="task">YouTube: Ders 4 – "Woher kommst du?" / "Wie alt bist du?"</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">13:00–14:00</div>
+                            <div class="task">Quizlet: 15 yeni kelime + görsel tekrar</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">16:00–17:00</div>
+                            <div class="task">DW Nicos Weg – Bölüm 3 izlenip yazıya dökülür</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">18:00–19:00</div>
+                            <div class="task">Kısa paragraf: Kendini tanıt (ad, yaş, ülke, meslek)</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">Quizlet haftalık tekrar testi (50 kelime)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="day-header">
+                        <span>📅</span>
+                        <span>15 Haziran Pazar</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time">10:00–11:00</div>
+                            <div class="task">Fiil tekrar: sein & haben (yazılı + sözlü)</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">13:00–14:00</div>
+                            <div class="task">Easy German – Numbers 1–20 videosu</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">16:00–17:00</div>
+                            <div class="task">Nicos Weg – Bölüm 4</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">18:00–19:00</div>
+                            <div class="task">Quizlet: Zayıf kaldığın kelimeleri tekrar et</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time">21:00–21:30</div>
+                            <div class="task">Değerlendirme: 1. hafta özeti + yeni hedef belirleme</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h2>✅ Haftalık Görev Listesi</h2>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task1">
+                    <label for="task1">50 kelimeyi ezberledim (%80 başarıyla test ettim)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task2">
+                    <label for="task2">"sein" ve "haben" fiillerini cümle içinde kullandım</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task3">
+                    <label for="task3">Kısa tanıtım paragrafı yazdım ve sesli tekrar ettim</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task4">
+                    <label for="task4">Nicos Weg A1 – İlk 4 bölümü izledim</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="task5">
+                    <label for="task5">10'dan fazla temel cümleyi sesli ve yazılı kurdum</label>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">İlerleme: 0%</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Checkbox functionality with progress tracking
+        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const totalCount = checkboxes.length;
+            const percentage = Math.round((checkedCount / totalCount) * 100);
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `İlerleme: ${percentage}%`;
+            
+            // Add completed class to parent
+            checkboxes.forEach(checkbox => {
+                const parent = checkbox.closest('.checklist-item');
+                if (checkbox.checked) {
+                    parent.classList.add('completed');
+                    createFloatingEmoji('✨', checkbox);
+                } else {
+                    parent.classList.remove('completed');
+                }
+            });
+        }
+
+        function createFloatingEmoji(emoji, element) {
+            const floatingEmoji = document.createElement('div');
+            floatingEmoji.className = 'floating-emoji';
+            floatingEmoji.textContent = emoji;
+            
+            const rect = element.getBoundingClientRect();
+            floatingEmoji.style.left = rect.left + rect.width / 2 + 'px';
+            floatingEmoji.style.top = rect.top + 'px';
+            
+            document.body.appendChild(floatingEmoji);
+            
+            setTimeout(() => {
+                floatingEmoji.remove();
+            }, 3000);
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Add click effect to day cards
+        document.querySelectorAll('.day-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add hover effect to time slots
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('mouseenter', () => {
+                slot.style.borderLeftWidth = '6px';
+            });
+            
+            slot.addEventListener('mouseleave', () => {
+                slot.style.borderLeftWidth = '4px';
+            });
+        });
+
+        // Initialize progress on page load
+        updateProgress();
+    </script>
+</body>
+</html>
